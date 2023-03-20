@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"kit.yo-star.com/go-kit/requests"
+	"github.com/Yostardev/requests"
 )
 
 type mockData struct {

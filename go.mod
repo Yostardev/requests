@@ -1,10 +1,10 @@
-module kit.yo-star.com/go-kit/requests
+module github.com/Yostardev/requests
 
 go 1.19
 
 require (
-	kit.yo-star.com/go-kit/gf v1.0.1
-	kit.yo-star.com/go-kit/json v1.0.3
+	github.com/Yostardev/gf v1.0.0
+	github.com/Yostardev/json v1.0.1
 )
 
 require (

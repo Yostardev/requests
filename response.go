@@ -4,8 +4,8 @@ import (
 	"encoding/xml"
 	"net/http"
 
-	"kit.yo-star.com/go-kit/gf"
-	"kit.yo-star.com/go-kit/json"
+	"github.com/Yostardev/gf"
+	"github.com/Yostardev/json"
 )
 
 // Response request请求的返回结果

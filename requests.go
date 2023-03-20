@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"kit.yo-star.com/go-kit/gf"
-	"kit.yo-star.com/go-kit/json"
+	"github.com/Yostardev/gf"
+	"github.com/Yostardev/json"
 )
 
 // request 发起请求的结构体

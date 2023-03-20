@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"kit.yo-star.com/go-kit/requests"
+	"github.com/Yostardev/requests"
 )
 
 func uploadRequest() {
