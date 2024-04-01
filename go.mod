@@ -1,14 +1,14 @@
 module github.com/Yostardev/requests
 
-go 1.20
+go 1.22
 
 require (
-	github.com/Yostardev/gf v1.0.3
-	github.com/Yostardev/json v1.0.5
+	github.com/Yostardev/gf v1.0.4
+	github.com/Yostardev/json v1.0.6
 )
 
 require (
-	github.com/bytedance/sonic v1.10.2 // indirect
+	github.com/bytedance/sonic v1.11.3 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
