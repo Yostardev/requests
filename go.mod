@@ -5,12 +5,14 @@ go 1.22
 require (
 	github.com/Yostardev/gf v1.0.4
 	github.com/Yostardev/json v1.0.6
+	gopkg.in/twindagger/httpsig.v1 v1.2.0
 )
 
 require (
 	github.com/bytedance/sonic v1.11.3 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect

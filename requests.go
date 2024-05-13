@@ -17,15 +17,22 @@ import (
 
 	"github.com/Yostardev/gf"
 	"github.com/Yostardev/json"
+	"gopkg.in/twindagger/httpsig.v1"
 )
 
 // request 发起请求的结构体
 type request struct {
-	Method     string
-	URL        string
-	Query      string
-	Body       io.Reader
-	Header     map[string]string
+	Method string
+	URL    string
+	Query  string
+	Body   io.Reader
+	Header map[string]string
+	Sign   *struct {
+		Headers   []string
+		KeyID     string
+		SecretID  string
+		Algorithm string
+	}
 	Cookies    []*http.Cookie
 	TimeOut    time.Duration
 	TLS        *tls.Config
@@ -50,6 +57,7 @@ func (r *request) reset() {
 	r.ReadBody = true
 	r.FileFields = nil
 	r.File = nil
+	r.Sign = nil
 }
 
 var resultPool = &sync.Pool{
@@ -89,7 +97,6 @@ func (r *request) SetJsonBody(data any) *request {
 	}
 	r.Body = bytes.NewBuffer(j)
 	return r.AddJsonHeader()
-
 }
 
 // SetXMLBody 设置XML请求体（结构体、Array、Dict...）
@@ -130,6 +137,17 @@ func (r *request) AddHeader(key, value string) *request {
 		r.Header = make(map[string]string)
 	}
 	r.Header[key] = value
+	return r
+}
+
+// SetSign 设置签名
+func (r *request) SetSign(headers []string, keyID, secretID, algorithm string) *request {
+	r.Sign = &struct {
+		Headers   []string
+		KeyID     string
+		SecretID  string
+		Algorithm string
+	}{headers, keyID, secretID, algorithm}
 	return r
 }
 
@@ -359,6 +377,16 @@ func (r *request) getBasisRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req = r.setHeader(req)
+	if r.Sign != nil {
+		signer, err := httpsig.NewRequestSigner(r.Sign.KeyID, r.Sign.SecretID, r.Sign.Algorithm)
+		if err != nil {
+			return nil, err
+		}
+		err = signer.SignRequest(req, r.Sign.Headers, nil)
+		if err != nil {
+			return nil, err
+		}
+	}
 	req = r.setCookie(req)
 	req.Close = true
 
@@ -377,6 +405,16 @@ func (r *request) getUploadRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req = r.setHeader(req)
+	if r.Sign != nil {
+		signer, err := httpsig.NewRequestSigner(r.Sign.KeyID, r.Sign.SecretID, r.Sign.Algorithm)
+		if err != nil {
+			return nil, err
+		}
+		err = signer.SignRequest(req, r.Sign.Headers, nil)
+		if err != nil {
+			return nil, err
+		}
+	}
 	req = r.setCookie(req)
 	req.Close = true
 	return req, nil
