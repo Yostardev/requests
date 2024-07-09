@@ -17,6 +17,7 @@ import (
 
 	"github.com/Yostardev/gf"
 	"github.com/Yostardev/json"
+	"github.com/akamai/AkamaiOPEN-edgegrid-golang/edgegrid"
 	"gopkg.in/twindagger/httpsig.v1"
 )
 
@@ -43,6 +44,7 @@ type request struct {
 		Filename  string
 		FileData  io.Reader
 	}
+	EdgeGrid *edgegrid.Config
 }
 
 func (r *request) reset() {
@@ -58,6 +60,7 @@ func (r *request) reset() {
 	r.FileFields = nil
 	r.File = nil
 	r.Sign = nil
+	r.EdgeGrid = nil
 }
 
 var resultPool = &sync.Pool{
@@ -137,6 +140,12 @@ func (r *request) AddHeader(key, value string) *request {
 		r.Header = make(map[string]string)
 	}
 	r.Header[key] = value
+	return r
+}
+
+// SetEdgeGrid 设置EdgeGrid
+func (r *request) SetEdgeGrid(config *edgegrid.Config) *request {
+	r.EdgeGrid = config
 	return r
 }
 
@@ -377,6 +386,9 @@ func (r *request) getBasisRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req = r.setHeader(req)
+	if r.EdgeGrid != nil {
+		req = edgegrid.AddRequestHeader(*r.EdgeGrid, req)
+	}
 	if r.Sign != nil {
 		signer, err := httpsig.NewRequestSigner(r.Sign.KeyID, r.Sign.SecretID, r.Sign.Algorithm)
 		if err != nil {
@@ -405,6 +417,9 @@ func (r *request) getUploadRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req = r.setHeader(req)
+	if r.EdgeGrid != nil {
+		req = edgegrid.AddRequestHeader(*r.EdgeGrid, req)
+	}
 	if r.Sign != nil {
 		signer, err := httpsig.NewRequestSigner(r.Sign.KeyID, r.Sign.SecretID, r.Sign.Algorithm)
 		if err != nil {
