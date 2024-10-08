@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -44,7 +45,8 @@ type request struct {
 		Filename  string
 		FileData  io.Reader
 	}
-	EdgeGrid *edgegrid.Config
+	EdgeGrid   *edgegrid.Config
+	RetryTimes uint64
 }
 
 func (r *request) reset() {
@@ -61,6 +63,7 @@ func (r *request) reset() {
 	r.File = nil
 	r.Sign = nil
 	r.EdgeGrid = nil
+	r.RetryTimes = 0
 }
 
 var resultPool = &sync.Pool{
@@ -83,6 +86,11 @@ func (r *request) GetRawResponseOnly() *request {
 // SetUrl 设置请求的url
 func (r *request) SetUrl(url string) *request {
 	r.URL = url
+	return r
+}
+
+func (r *request) SetRetryTimes(retryTimes uint64) *request {
+	r.RetryTimes = retryTimes
 	return r
 }
 
@@ -460,10 +468,29 @@ func (r *request) run() (*Response, error) {
 	}
 
 	// 开始请求
-	client := &http.Client{Timeout: r.TimeOut, Transport: &http.Transport{TLSClientConfig: r.TLS}}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
+	var (
+		resp      *http.Response
+		errorList []error
+	)
+	for i := range r.RetryTimes + 1 {
+		c := &http.Client{Timeout: r.TimeOut, Transport: &http.Transport{TLSClientConfig: r.TLS}}
+		resp, err = c.Do(req)
+		if err != nil {
+			if r.RetryTimes == 0 {
+				return nil, err
+			} else {
+				errorList = append(errorList, err)
+				if i == r.RetryTimes {
+					var errStrList []string
+					for j := range errorList {
+						errStrList = append(errStrList, gf.StringJoin("try ", strconv.Itoa(j+1), " time, error: ", errorList[j].Error()))
+					}
+					return nil, errors.New(strings.Join(errStrList, "\n"))
+				}
+			}
+		} else {
+			break
+		}
 	}
 	defer func() {
 		if r.ReadBody {
