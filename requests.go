@@ -89,6 +89,7 @@ func (r *request) SetUrl(url string) *request {
 	return r
 }
 
+// SetRetryTimes 设置重试次数（实际执行次数为重试次数+1）
 func (r *request) SetRetryTimes(retryTimes uint64) *request {
 	r.RetryTimes = retryTimes
 	return r
