@@ -37,6 +37,7 @@ func main() {
 	})
 
 	http.HandleFunc("/with_time_out/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 		var res string
 		switch r.Method {
 		case "GET":

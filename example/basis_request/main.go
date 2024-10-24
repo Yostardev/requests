@@ -93,7 +93,7 @@ func postRawRequests() {
 // withTimeoutRequests 规定请求超时时间
 func withTimeoutRequests() {
 	r := requests.New()
-	res, err := r.SetUrl("http://127.0.0.1:8080/with_time_out/").SetTimeOut(5 * time.Second).Get()
+	res, err := r.SetUrl("http://127.0.0.1:8080/with_time_out/").SetRetryTimes(10).SetRetryInterval(10 * time.Second).SetTimeOut(2 * time.Second).Get()
 	if err != nil {
 		log.Fatalf("%+v", err) // Get "http://127.0.0.1:8080/with_time_out/": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
 	}

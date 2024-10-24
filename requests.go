@@ -45,8 +45,9 @@ type request struct {
 		Filename  string
 		FileData  io.Reader
 	}
-	EdgeGrid   *edgegrid.Config
-	RetryTimes uint64
+	EdgeGrid      *edgegrid.Config
+	RetryTimes    uint64
+	RetryInterval time.Duration
 }
 
 func (r *request) reset() {
@@ -92,6 +93,12 @@ func (r *request) SetUrl(url string) *request {
 // SetRetryTimes 设置重试次数（实际执行次数为重试次数+1）
 func (r *request) SetRetryTimes(retryTimes uint64) *request {
 	r.RetryTimes = retryTimes
+	return r
+}
+
+// SetRetryInterval 设置重试间隔
+func (r *request) SetRetryInterval(retryInterval time.Duration) *request {
+	r.RetryInterval = retryInterval
 	return r
 }
 
@@ -489,6 +496,7 @@ func (r *request) run() (*Response, error) {
 					return nil, errors.New(strings.Join(errStrList, "\n"))
 				}
 			}
+			time.Sleep(r.RetryInterval)
 		} else {
 			break
 		}
