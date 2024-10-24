@@ -65,6 +65,7 @@ func (r *request) reset() {
 	r.Sign = nil
 	r.EdgeGrid = nil
 	r.RetryTimes = 0
+	r.RetryInterval = 0
 }
 
 var resultPool = &sync.Pool{
