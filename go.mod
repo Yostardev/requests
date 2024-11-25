@@ -4,13 +4,13 @@ go 1.22
 
 require (
 	github.com/Yostardev/gf v1.0.4
-	github.com/Yostardev/json v1.0.8
+	github.com/Yostardev/json v1.0.9
 	github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2
 	gopkg.in/twindagger/httpsig.v1 v1.2.0
 )
 
 require (
-	github.com/bytedance/sonic v1.12.5 // indirect
+	github.com/bytedance/sonic v1.12.4 // indirect
 	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
