@@ -4,13 +4,13 @@ go 1.22
 
 require (
 	github.com/Yostardev/gf v1.0.4
-	github.com/Yostardev/json v1.0.7
+	github.com/Yostardev/json v1.0.8
 	github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2
 	gopkg.in/twindagger/httpsig.v1 v1.2.0
 )
 
 require (
-	github.com/bytedance/sonic v1.12.3 // indirect
+	github.com/bytedance/sonic v1.12.5 // indirect
 	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
@@ -25,6 +25,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	golang.org/x/arch v0.3.0 // indirect
 	golang.org/x/sys v0.7.0 // indirect

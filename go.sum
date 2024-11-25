@@ -1,11 +1,11 @@
 github.com/Yostardev/gf v1.0.4 h1:aGO/5PEHYu9fjpGPQH7OR0CAUij/w/xkYoJukiaeiD0=
 github.com/Yostardev/gf v1.0.4/go.mod h1:pMQ2iLhoZlqQQ1qqMJVmtowLJWmJz1K0ta6LS5a+aBU=
-github.com/Yostardev/json v1.0.7 h1:FTz4LcUhQB63FHHW/QW78UwDSJcZkYpxFfrJSMJFurw=
-github.com/Yostardev/json v1.0.7/go.mod h1:nOwRLzI1A3xWgEcaaq1b+Rkl4neVyISRI2AZ53HenxE=
+github.com/Yostardev/json v1.0.8 h1:TRpnxemrCvSkrjxIACTiPnGvTazhIJaYuO4P5bGReHc=
+github.com/Yostardev/json v1.0.8/go.mod h1:krc4Qh5X+BNcAlFO/QZsDSmp6Kpq3zt7B3XlToVUN1U=
 github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2 h1:F1j7z+/DKEsYqZNoxC6wvfmaiDneLsQOFQmuq9NADSY=
 github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2/go.mod h1:QlXr/TrICfQ/ANa76sLeQyhAJyNR9sEcfNuZBkY9jgY=
-github.com/bytedance/sonic v1.12.3 h1:W2MGa7RCU1QTeYRTPE3+88mVC0yXmsRQRChiyVocVjU=
-github.com/bytedance/sonic v1.12.3/go.mod h1:B8Gt/XvtZ3Fqj+iSKMypzymZxw/FVwgIGKzMzT9r/rk=
+github.com/bytedance/sonic v1.12.5 h1:hoZxY8uW+mT+OpkcUWw4k0fDINtOcVavEsGfzwzFU/w=
+github.com/bytedance/sonic v1.12.5/go.mod h1:B8Gt/XvtZ3Fqj+iSKMypzymZxw/FVwgIGKzMzT9r/rk=
 github.com/bytedance/sonic/loader v0.1.1/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=
 github.com/bytedance/sonic/loader v0.2.0 h1:zNprn+lsIP06C/IqCHs3gPQIvnvpKbbxyXQP1iU4kWM=
 github.com/bytedance/sonic/loader v0.2.0/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=
@@ -64,8 +64,9 @@ github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UV
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
-github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
+github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
+github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f/go.mod h1:N2zxlSyiKSe5eX1tZViRH5QA0qijqEDrYZiPEAiq3wU=
