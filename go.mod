@@ -1,21 +1,20 @@
 module github.com/Yostardev/requests
 
-go 1.22
+go 1.24
 
 require (
 	github.com/Yostardev/gf v1.0.4
-	github.com/Yostardev/json v1.0.9
+	github.com/Yostardev/json v1.0.10
 	github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2
 	gopkg.in/twindagger/httpsig.v1 v1.2.0
 )
 
 require (
-	github.com/bytedance/sonic v1.12.4 // indirect
-	github.com/bytedance/sonic/loader v0.2.0 // indirect
-	github.com/cloudwego/base64x v0.1.4 // indirect
-	github.com/cloudwego/iasm v0.2.0 // indirect
+	github.com/bytedance/sonic v1.12.8 // indirect
+	github.com/bytedance/sonic/loader v0.2.2 // indirect
+	github.com/cloudwego/base64x v0.1.5 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
-	github.com/goccy/go-json v0.10.3 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
