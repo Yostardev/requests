@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/base64"
+	"encoding/json"
 	"encoding/xml"
 	"errors"
 	"io"
@@ -17,7 +18,6 @@ import (
 	"time"
 
 	"github.com/Yostardev/gf"
-	"github.com/Yostardev/json"
 	"github.com/akamai/AkamaiOPEN-edgegrid-golang/edgegrid"
 	"gopkg.in/twindagger/httpsig.v1"
 )

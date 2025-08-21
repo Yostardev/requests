@@ -1,11 +1,11 @@
 package requests
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"net/http"
 
 	"github.com/Yostardev/gf"
-	"github.com/Yostardev/json"
 )
 
 // Response request请求的返回结果
