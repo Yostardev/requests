@@ -466,22 +466,23 @@ func (r *request) run() (*Response, error) {
 		return nil, err
 	}
 
-	switch {
-	case len(r.File) != 0:
-		req, err = r.getUploadRequest()
-	default:
-		req, err = r.getBasisRequest()
-	}
-	if err != nil {
-		return nil, err
-	}
-
 	// 开始请求
 	var (
 		resp      *http.Response
 		errorList []error
 	)
+
 	for i := range r.RetryTimes + 1 {
+		switch {
+		case len(r.File) != 0:
+			req, err = r.getUploadRequest()
+		default:
+			req, err = r.getBasisRequest()
+		}
+		if err != nil {
+			return nil, err
+		}
+
 		c := &http.Client{Timeout: r.TimeOut, Transport: &http.Transport{TLSClientConfig: r.TLS}}
 		resp, err = c.Do(req)
 		if err != nil {
