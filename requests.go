@@ -12,7 +12,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -45,9 +44,7 @@ type request struct {
 		Filename  string
 		FileData  io.Reader
 	}
-	EdgeGrid      *edgegrid.Config
-	RetryTimes    uint64
-	RetryInterval time.Duration
+	EdgeGrid *edgegrid.Config
 }
 
 func (r *request) reset() {
@@ -64,8 +61,6 @@ func (r *request) reset() {
 	r.File = nil
 	r.Sign = nil
 	r.EdgeGrid = nil
-	r.RetryTimes = 0
-	r.RetryInterval = 0
 }
 
 var resultPool = &sync.Pool{
@@ -88,18 +83,6 @@ func (r *request) GetRawResponseOnly() *request {
 // SetUrl 设置请求的url
 func (r *request) SetUrl(url string) *request {
 	r.URL = url
-	return r
-}
-
-// SetRetryTimes 设置重试次数（实际执行次数为重试次数+1）
-func (r *request) SetRetryTimes(retryTimes uint64) *request {
-	r.RetryTimes = retryTimes
-	return r
-}
-
-// SetRetryInterval 设置重试间隔
-func (r *request) SetRetryInterval(retryInterval time.Duration) *request {
-	r.RetryInterval = retryInterval
 	return r
 }
 
@@ -467,42 +450,24 @@ func (r *request) run() (*Response, error) {
 	}
 
 	// 开始请求
-	var (
-		resp      *http.Response
-		errorList []error
-	)
+	var resp *http.Response
 
-	for i := range r.RetryTimes + 1 {
-		switch {
-		case len(r.File) != 0:
-			req, err = r.getUploadRequest()
-		default:
-			req, err = r.getBasisRequest()
-		}
-		if err != nil {
-			return nil, err
-		}
-
-		c := &http.Client{Timeout: r.TimeOut, Transport: &http.Transport{TLSClientConfig: r.TLS}}
-		resp, err = c.Do(req)
-		if err != nil {
-			if r.RetryTimes == 0 {
-				return nil, err
-			} else {
-				errorList = append(errorList, err)
-				if i == r.RetryTimes {
-					var errStrList []string
-					for j := range errorList {
-						errStrList = append(errStrList, gf.StringJoin("try ", strconv.Itoa(j+1), " time, error: ", errorList[j].Error()))
-					}
-					return nil, errors.New(strings.Join(errStrList, "\n"))
-				}
-			}
-			time.Sleep(r.RetryInterval)
-		} else {
-			break
-		}
+	switch {
+	case len(r.File) != 0:
+		req, err = r.getUploadRequest()
+	default:
+		req, err = r.getBasisRequest()
 	}
+	if err != nil {
+		return nil, err
+	}
+
+	c := &http.Client{Timeout: r.TimeOut, Transport: &http.Transport{TLSClientConfig: r.TLS}}
+	resp, err = c.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
 	defer func() {
 		if r.ReadBody {
 			_ = resp.Body.Close()
